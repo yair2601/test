@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"c:/Users/ygafsou/Code test/docs/superpowers/specs\")",
+      "Bash(mkdir -p \"c:/Users/ygafsou/Code test/docs/superpowers/memory\")",
+      "Bash(mkdir -p \"c:/Users/ygafsou/Code test/docs/superpowers/skills\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --use-npm --yes)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --use-npm --yes --no-git)",
+      "Bash(echo \"EXIT_CODE: $?\")",
+      "Bash(npx create-next-app@latest --help)",
+      "Bash(npx create-next-app@latest ai-marketing-platform --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --use-npm --yes --disable-git)",
+      "Bash(npm install *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(JSON.stringify\\({...p.dependencies, ...p.devDependencies}, null, 2\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(cat)",
+      "Bash(npx jest *)",
+      "Bash(rm smoke.test.ts)"
+    ]
+  }
+}
