@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head><meta charset="utf-8"><title>ORDERS</title></head>
+<body>
+  <div id="toolbar">
+    <button id="btnNew" title="רשומה חדשה">רשומה חדשה</button>
+    <button id="btnSave" title="שמור">שמור</button>
+    <button id="btnSearch" title="חיפוש">חיפוש</button>
+    <button id="btnLines" title="שורות הזמנה">שורות הזמנה</button>
+  </div>
+
+  <form id="hdr">
+    <label for="fRef">אסמכתא</label>
+    <input id="fRef" name="REFERENCE" type="text" />
+    <label for="fCust">מספר לקוח</label>
+    <input id="fCust" name="CUSTNAME" type="text" />
+    <label for="fDate">תאריך</label>
+    <input id="fDate" name="CURDATE" type="text" placeholder="dd/mm/yyyy" />
+  </form>
+
+  <table id="lines">
+    <thead><tr><th>מק"ט</th><th>כמות</th><th>מחיר</th></tr></thead>
+    <tbody>
+      <tr><td><input name="PARTNAME_1"></td><td><input name="TQUANT_1"></td><td><input name="VPRICE_1"></td></tr>
+      <tr><td><input name="PARTNAME_2"></td><td><input name="TQUANT_2"></td><td><input name="VPRICE_2"></td></tr>
+    </tbody>
+  </table>
+
+  <div id="extra" style="display:none">
+    <button id="btnConfirm">אישור</button>
+  </div>
+
+  <script>
+    // Mimics a Priority "new record" click: reveals a hidden control and adds a row.
+    document.getElementById('btnNew').addEventListener('click', function () {
+      document.getElementById('extra').style.display = 'block';
+      var tb = document.querySelector('#lines tbody');
+      var tr = document.createElement('tr');
+      var n = tb.children.length + 1;
+      tr.innerHTML = '<td><input name="PARTNAME_' + n + '"></td>' +
+                     '<td><input name="TQUANT_' + n + '"></td>' +
+                     '<td><input name="VPRICE_' + n + '"></td>';
+      tb.appendChild(tr);
+    });
+  </script>
+</body>
+</html>

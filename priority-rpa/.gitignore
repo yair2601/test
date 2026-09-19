@@ -1,0 +1,23 @@
+# Session / secrets — never commit
+storage_state.json
+session-info.json
+
+# Real config (copy from config.example.yaml)
+config.yaml
+
+# Run outputs
+runs/
+state/
+discovery-out/
+
+# Data files
+*.xlsx
+*.xls
+*.xlsm
+!tests/fixtures/*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
