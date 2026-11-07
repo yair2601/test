@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>In Loving Memory</title>
+  <meta name="description" content="A memorial website celebrating the life of [Full Name].">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Theme tokens ---------- */
+    :root {
+      --bg: #faf8f4;
+      --surface: #ffffff;
+      --ink: #2b2925;
+      --muted: #6f6a61;
+      --line: #e6e0d6;
+      --accent: #8a6d3b;
+      --accent-soft: #f1e9da;
+      --shadow: 0 1px 2px rgba(43, 41, 37, .04), 0 8px 24px rgba(43, 41, 37, .06);
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --max: 1080px;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #171614;
+        --surface: #201f1c;
+        --ink: #ece7de;
+        --muted: #a39d92;
+        --line: #34312c;
+        --accent: #c9a96a;
+        --accent-soft: #2c271e;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #171614;
+      --surface: #201f1c;
+      --ink: #ece7de;
+      --muted: #a39d92;
+      --line: #34312c;
+      --accent: #c9a96a;
+      --accent-soft: #2c271e;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+      color-scheme: dark;
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.15; margin: 0; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+    section { padding: 88px 0; border-top: 1px solid var(--line); }
+    .eyebrow {
+      font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); margin: 0 0 12px;
+    }
+    .section-title { font-size: clamp(32px, 5vw, 44px); margin-bottom: 40px; }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+    .nav-name { font-family: var(--serif); font-size: 20px; color: var(--ink); text-decoration: none; white-space: nowrap; }
+    .nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+    .nav ul a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .nav ul a:hover { color: var(--ink); }
+    .theme-btn {
+      border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+      border-radius: 999px; width: 36px; height: 36px; cursor: pointer; flex-shrink: 0;
+    }
+    @media (max-width: 720px) { .nav ul { display: none; } }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 96px 0 104px; text-align: center; border-top: 0; }
+    .portrait {
+      width: 220px; height: 280px; margin: 0 auto 40px;
+      border-radius: 110px 110px 12px 12px;
+      overflow: hidden; box-shadow: var(--shadow);
+      border: 6px solid var(--surface);
+      background: linear-gradient(160deg, var(--accent-soft), var(--line));
+      display: grid; place-items: center;
+    }
+    .portrait span { font-family: var(--serif); font-size: 64px; color: var(--accent); }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .hero h1 { font-size: clamp(44px, 8vw, 76px); }
+    .dates { font-family: var(--serif); font-size: 22px; color: var(--muted); margin: 16px 0 32px; letter-spacing: .04em; }
+    .divider { width: 56px; height: 1px; background: var(--accent); margin: 0 auto 32px; }
+    .epitaph { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 3vw, 26px); max-width: 620px; margin: 0 auto; color: var(--ink); }
+
+    /* ---------- Life story ---------- */
+    .story { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; }
+    .story-body p { margin: 0 0 20px; font-size: 17px; }
+    .story-body p:first-child::first-letter {
+      font-family: var(--serif); float: left; font-size: 72px; line-height: .85;
+      padding: 6px 10px 0 0; color: var(--accent);
+    }
+    .facts { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+    .facts li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .facts dt, .facts .k { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .facts .v { font-family: var(--serif); font-size: 20px; }
+    @media (max-width: 800px) { .story { grid-template-columns: 1fr; gap: 32px; } }
+
+    /* ---------- Timeline ---------- */
+    .timeline { position: relative; max-width: 720px; margin: 0 auto; padding-left: 32px; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+    .event { position: relative; padding-bottom: 36px; }
+    .event::before {
+      content: ""; position: absolute; left: -32px; top: 8px; width: 15px; height: 15px;
+      border-radius: 50%; background: var(--bg); border: 2px solid var(--accent);
+    }
+    .event .year { font-family: var(--serif); font-size: 24px; color: var(--accent); }
+    .event h3 { font-size: 22px; margin: 2px 0 6px; }
+    .event p { margin: 0; color: var(--muted); }
+
+    /* ---------- Gallery ---------- */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .photo {
+      margin: 0; background: var(--surface); padding: 10px 10px 14px;
+      box-shadow: var(--shadow); border-radius: 6px;
+    }
+    .photo .ph {
+      aspect-ratio: 4 / 3; border-radius: 3px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--line));
+      display: grid; place-items: center; color: var(--muted); font-size: 13px;
+    }
+    .photo figcaption { font-family: var(--serif); font-size: 17px; margin-top: 10px; text-align: center; color: var(--muted); }
+
+    /* ---------- Service ---------- */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+    .card h3 { font-size: 26px; margin-bottom: 12px; }
+    .card p { margin: 0 0 6px; color: var(--muted); }
+    .card .when { color: var(--ink); font-weight: 500; }
+
+    /* ---------- Tributes ---------- */
+    .tributes { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .tribute-list { display: flex; flex-direction: column; gap: 16px; }
+    .tribute { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 20px 24px; }
+    .tribute blockquote { margin: 0 0 10px; font-family: var(--serif); font-size: 20px; font-style: italic; }
+    .tribute cite { font-style: normal; font-size: 14px; color: var(--muted); }
+    form { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+    form h3 { font-size: 26px; margin-bottom: 16px; }
+    label { display: block; font-size: 13px; color: var(--muted); margin: 14px 0 6px; }
+    input, textarea {
+      width: 100%; font: inherit; color: var(--ink); background: var(--bg);
+      border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+    }
+    input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    textarea { min-height: 120px; resize: vertical; }
+    .btn {
+      margin-top: 18px; background: var(--accent); color: var(--bg); border: 0;
+      padding: 12px 22px; border-radius: 999px; font: inherit; font-weight: 500; cursor: pointer;
+    }
+    .btn:hover { filter: brightness(1.08); }
+    @media (max-width: 800px) { .tributes { grid-template-columns: 1fr; } }
+
+    /* ---------- Donations / footer ---------- */
+    .donate { text-align: center; }
+    .donate p { max-width: 560px; margin: 0 auto 24px; color: var(--muted); }
+    .donate .btn { text-decoration: none; display: inline-block; }
+    footer { border-top: 1px solid var(--line); padding: 40px 0; text-align: center; color: var(--muted); font-size: 14px; }
+    footer .candle { font-size: 22px; display: block; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="nav-name" href="#top">[Full Name]</a>
+      <ul>
+        <li><a href="#story">Life Story</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#gallery">Photos</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#tributes">Tributes</a></li>
+      </ul>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">◐</button>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+      <div class="wrap">
+        <div class="portrait">
+          <!-- Replace with: <img src="portrait.jpg" alt="Portrait of [Full Name]"> -->
+          <span aria-hidden="true">AB</span>
+        </div>
+        <p class="eyebrow">In Loving Memory</p>
+        <h1>[Full Name]</h1>
+        <p class="dates">March 4, 1941 &nbsp;—&nbsp; October 12, 2026</p>
+        <div class="divider"></div>
+        <p class="epitaph">“What we have once enjoyed we can never lose. All that we love deeply becomes a part of us.”</p>
+      </div>
+    </header>
+
+    <!-- ===== Life story ===== -->
+    <section id="story">
+      <div class="wrap story">
+        <div>
+          <p class="eyebrow">Remembering</p>
+          <h2 class="section-title">A Life Well Lived</h2>
+          <ul class="facts">
+            <li><div class="k">Born</div><div class="v">[City, Country]</div></li>
+            <li><div class="k">Family</div><div class="v">Spouse, 3 children, 7 grandchildren</div></li>
+            <li><div class="k">Vocation</div><div class="v">Teacher &amp; Musician</div></li>
+            <li><div class="k">Loved</div><div class="v">Gardening, jazz, long walks</div></li>
+          </ul>
+        </div>
+        <div class="story-body">
+          <p>[First name] was born in [City] in 1941, the youngest of four children. From an early age, [they] showed a curiosity for the world and a warmth that drew people close. This is the place to tell their story — where they grew up, the people who shaped them, and the moments that defined who they became.</p>
+          <p>After studying at [University], [First name] spent over thirty years teaching, touching the lives of thousands of students who still remember [their] patience, humour and unwavering belief in them. Describe their career, passions and the values they lived by.</p>
+          <p>Above all, [First name] was devoted to family. Sunday dinners, summer trips to the lake and endless stories at the kitchen table were the heart of [their] life. [They] will be deeply missed by all who had the privilege of knowing [them].</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Timeline ===== -->
+    <section id="timeline">
+      <div class="wrap">
+        <p class="eyebrow" style="text-align:center">Milestones</p>
+        <h2 class="section-title" style="text-align:center">Life Timeline</h2>
+        <div class="timeline">
+          <div class="event"><div class="year">1941</div><h3>Born in [City]</h3><p>Welcomed by parents [Names] as the youngest of four.</p></div>
+          <div class="event"><div class="year">1963</div><h3>Graduated from [University]</h3><p>Earned a degree in Education and Music.</p></div>
+          <div class="event"><div class="year">1967</div><h3>Married [Spouse Name]</h3><p>Began a partnership that lasted nearly six decades.</p></div>
+          <div class="event"><div class="year">1970–2004</div><h3>Teaching career</h3><p>Taught at [School], mentoring generations of students.</p></div>
+          <div class="event"><div class="year">2004</div><h3>Retirement</h3><p>Devoted time to family, the garden and the community choir.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Gallery ===== -->
+    <section id="gallery">
+      <div class="wrap">
+        <p class="eyebrow">Moments</p>
+        <h2 class="section-title">Photo Gallery</h2>
+        <div class="gallery">
+          <!-- Replace each .ph div with <img src="photo-1.jpg" alt="..."> -->
+          <figure class="photo"><div class="ph">Photo</div><figcaption>Childhood, 1948</figcaption></figure>
+          <figure class="photo"><div class="ph">Photo</div><figcaption>Wedding day, 1967</figcaption></figure>
+          <figure class="photo"><div class="ph">Photo</div><figcaption>In the classroom</figcaption></figure>
+          <figure class="photo"><div class="ph">Photo</div><figcaption>Summer at the lake</figcaption></figure>
+          <figure class="photo"><div class="ph">Photo</div><figcaption>With the grandchildren</figcaption></figure>
+          <figure class="photo"><div class="ph">Photo</div><figcaption>80th birthday</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Service details ===== -->
+    <section id="service">
+      <div class="wrap">
+        <p class="eyebrow">Gathering</p>
+        <h2 class="section-title">Service Information</h2>
+        <div class="service-grid">
+          <div class="card">
+            <h3>Memorial Service</h3>
+            <p class="when">Saturday, November 21, 2026 · 11:00 AM</p>
+            <p>[Venue Name]</p>
+            <p>[Street Address, City]</p>
+            <p><a href="#">Get directions →</a></p>
+          </div>
+          <div class="card">
+            <h3>Reception</h3>
+            <p class="when">Following the service · 1:00 PM</p>
+            <p>[Venue Name]</p>
+            <p>All are welcome to join the family.</p>
+          </div>
+          <div class="card">
+            <h3>Live Stream</h3>
+            <p class="when">For those unable to attend</p>
+            <p>The service will be streamed online.</p>
+            <p><a href="#">Watch the service →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tributes / guestbook ===== -->
+    <section id="tributes">
+      <div class="wrap">
+        <p class="eyebrow">Guestbook</p>
+        <h2 class="section-title">Memories &amp; Tributes</h2>
+        <div class="tributes">
+          <div class="tribute-list" id="tributeList">
+            <article class="tribute">
+              <blockquote>“The best teacher I ever had. You taught me to believe in myself.”</blockquote>
+              <cite>— Former student</cite>
+            </article>
+            <article class="tribute">
+              <blockquote>“Your laughter filled every room. We will carry your kindness with us always.”</blockquote>
+              <cite>— Neighbour and friend</cite>
+            </article>
+            <article class="tribute">
+              <blockquote>“Thank you for every story, every song and every Sunday dinner.”</blockquote>
+              <cite>— Grandchild</cite>
+            </article>
+          </div>
+          <form id="tributeForm">
+            <h3>Share a Memory</h3>
+            <label for="tName">Your name</label>
+            <input id="tName" name="name" required maxlength="80" placeholder="e.g. A friend from the choir">
+            <label for="tMsg">Your message</label>
+            <textarea id="tMsg" name="message" required maxlength="1000" placeholder="Share a memory, story or message of condolence…"></textarea>
+            <button class="btn" type="submit">Post Tribute</button>
+            <!-- POC only: tributes are added on the page and not saved. Connect to a backend to persist them. -->
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Donations ===== -->
+    <section class="donate">
+      <div class="wrap">
+        <p class="eyebrow">In Lieu of Flowers</p>
+        <h2 class="section-title">Honour [Their] Memory</h2>
+        <p>The family kindly asks that, in lieu of flowers, donations be made to [Charity Name], a cause close to [First name]'s heart.</p>
+        <a class="btn" href="#">Make a Donation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="candle" aria-hidden="true">🕯️</span>
+      Forever in our hearts · [Full Name], 1941–2026
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle (remembered per visitor when storage is available)
+    (function () {
+      var root = document.documentElement;
+      try { var saved = localStorage.getItem("memorial-theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+      document.getElementById("themeBtn").addEventListener("click", function () {
+        var dark = root.dataset.theme
+          ? root.dataset.theme === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches;
+        root.dataset.theme = dark ? "light" : "dark";
+        try { localStorage.setItem("memorial-theme", root.dataset.theme); } catch (e) {}
+      });
+    })();
+
+    // Guestbook (POC: in-page only, nothing is stored)
+    document.getElementById("tributeForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = this.name.value.trim();
+      var msg = this.message.value.trim();
+      if (!name || !msg) return;
+      var art = document.createElement("article");
+      art.className = "tribute";
+      var q = document.createElement("blockquote");
+      q.textContent = "“" + msg + "”";
+      var c = document.createElement("cite");
+      c.textContent = "— " + name;
+      art.append(q, c);
+      document.getElementById("tributeList").prepend(art);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
